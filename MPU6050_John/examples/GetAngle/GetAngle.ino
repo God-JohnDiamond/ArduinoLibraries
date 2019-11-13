@@ -22,7 +22,7 @@ void loop() {
   Serial.print("\t");
   
   mpu6050.update(MPU6050_ADDR_VCC);
-  float AngleX_VCC = mpu6050.getAngleX();
+  float AngleX_VCC = mpu6050.getAngleX_1();
   Serial.print("AngleX_VCC_0x69 : ");
   Serial.println(AngleX_VCC);
 }
