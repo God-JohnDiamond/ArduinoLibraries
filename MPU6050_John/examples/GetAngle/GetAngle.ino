@@ -8,8 +8,8 @@ void setup() {
   Serial.begin(9600);
   Wire.begin();
   mpu6050.begin(MPU6050_ADDR_GND);
+  mpu6050.calcGyroOffsets(true,MPU6050_ADDR_GND);  
   mpu6050.begin(MPU6050_ADDR_VCC);
-  mpu6050.calcGyroOffsets(true,MPU6050_ADDR_GND);
   mpu6050.calcGyroOffsets(true,MPU6050_ADDR_VCC);
 }
 

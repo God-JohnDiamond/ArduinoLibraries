@@ -20,16 +20,20 @@ void MPU6050::begin(byte MPU6050_ADDR){
   writeMPU6050(MPU6050_ADDR, MPU6050_ACCEL_CONFIG, 0x00);
   writeMPU6050(MPU6050_ADDR, MPU6050_PWR_MGMT_1, 0x01);
   this->update(MPU6050_ADDR);
-  angleGyroX = 0;
-  angleGyroX_1 = 0;
-  angleGyroY = 0;
-  angleGyroY_1 = 0;
-  angleX = this->getAccAngleX();
-  angleX_1 = this->getAccAngleX_1();
-  angleY = this->getAccAngleY();
-  angleY_1 = this->getAccAngleY_1();
-  preInterval = millis();
-  preInterval_1 = millis();
+   if(MPU6050_ADDR == MPU6050_ADDR_GND){
+	  angleGyroX = 0; 
+	  angleGyroY = 0;
+	  angleX = this->getAccAngleX();
+	  angleY = this->getAccAngleY();
+	  preInterval = millis();
+   }
+  else if(MPU6050_ADDR == MPU6050_ADDR_VCC){
+	  angleGyroX_1 = 0;  
+	  angleGyroY_1 = 0;  
+	  angleX_1 = this->getAccAngleX_1();  
+	  angleY_1 = this->getAccAngleY_1();  
+	  preInterval_1 = millis();
+  }
 }
 
 void MPU6050::writeMPU6050(byte MPU6050_ADDR, byte reg, byte data){
