@@ -17,9 +17,14 @@ void setup() {
 }
 
 void loop() {
+	mpu6050.update(MPU6050_ADDR_GND);
+	float AngleX_GND = mpu6050.getAngleX();
+	mpu6050.update(MPU6050_ADDR_VCC);
+	float AngleX_VCC = mpu6050.getAngleX_1();
+
 	sCurtime = millis();
 	sDiffTim = sCurtime - sLastime;	
-	if(sDiffTim >= 20)  //Data Rate is 50Hz
+	if(sDiffTim == 20)  //Data Rate is 50Hz
 	{
 		Serial.print("Now time is :");
 		Serial.print(sCurtime);
@@ -29,14 +34,11 @@ void loop() {
 		Serial.print("ms\t");
 		
 		//Print 2IMUs' X Angle
-		mpu6050.update(MPU6050_ADDR_GND);
-		float AngleX_GND = mpu6050.getAngleX();
+
 		Serial.print("AngleX_GND_0x68 : ");
 		Serial.print(AngleX_GND);
 		Serial.print("\t");
 
-		mpu6050.update(MPU6050_ADDR_VCC);
-		float AngleX_VCC = mpu6050.getAngleX_1();
 		Serial.print("AngleX_VCC_0x69 : ");
 		Serial.println(AngleX_VCC);
 
