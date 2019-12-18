@@ -14,12 +14,14 @@ void setup() {
   Wire.begin();
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  pinMode(11,OUTPUT); //PWM OUT
   mpu6050.begin(MPU6050_ADDR_GND);
   mpu6050.calcGyroOffsets(true,MPU6050_ADDR_GND);  
   mpu6050.begin(MPU6050_ADDR_VCC);
   mpu6050.calcGyroOffsets(true,MPU6050_ADDR_VCC);
   digitalWrite(4, LOW);
   digitalWrite(5, LOW);
+  analogWrite(11,28);
 }
 
 void loop() {
@@ -28,6 +30,7 @@ void loop() {
 	mpu6050.update(MPU6050_ADDR_VCC);
 	float AngleX_VCC = mpu6050.getAngleX_1();
 	CurDifAngle = AngleX_GND - AngleX_VCC;
+	analogWrite(11,28);  // PWM OUT ~0.55V
 	
 	sCurtime = millis();
 	sDiffTim = sCurtime - sLastime;	
